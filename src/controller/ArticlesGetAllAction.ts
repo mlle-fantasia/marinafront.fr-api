@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {getManager} from "typeorm";
+import {getManager, getRepository} from "typeorm";
 import {Article} from "../entity/Article";
 
 /**
@@ -7,13 +7,19 @@ import {Article} from "../entity/Article";
  */
 export async function articlesGetAllAction(request: Request, response: Response) {
 
-        // get a post repository to perform operations with post
-        const articlesRepository = getManager().getRepository(Article);
-        // load a post by a given post id
-        const articles = await
-        articlesRepository.find();
+    const entities = await getRepository(Article).createQueryBuilder("article")
+        .select(["article.title", "article.miniature","article.resume","article.langage","article.site"])
+        .getMany();
+        response.send(entities);
 
-        // return loaded posts
-        response.send(articles);
+}
+
+export async function articlesGetAllAdminAction(request: Request, response: Response) {
+
+    const entities = await getRepository(Article).createQueryBuilder("article")
+        .select(["article.title", "article.miniature"])
+        .getMany();
+
+    response.send(entities);
 
 }

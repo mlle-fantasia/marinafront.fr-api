@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {getManager} from "typeorm";
-import {Post} from "../entity/Post";
+import {Article} from "../entity/Article";
 
 /**
  * Saves given post.
@@ -8,14 +8,21 @@ import {Post} from "../entity/Post";
 export async function articlesSaveAction(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
-    const postRepository = getManager().getRepository(Post);
+    const articleRepository = getManager().getRepository(Article);
 
-    // create a real post object from post json object sent over http
-    const newPost = postRepository.create(request.body);
+    let article = new Article();
+    article.title = request.body.title;
+    article.resume = request.body.resume;
+    article.miniature = request.body.miniature;
+    article.site = request.body.site;
+    article.contenu = request.body.contenu;
+    article.langage = request.body.langage;
+
+    const newArticle = articleRepository.create(article);
 
     // save received post
-    await postRepository.save(newPost);
+    await articleRepository.save(newArticle);
 
     // return saved post back
-    response.send(newPost);
+    response.send(newArticle);
 }

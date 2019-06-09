@@ -4,7 +4,7 @@ import {Request, Response} from "express";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {AppRoutes} from "./routes";
-// import {cors} from "cors";
+import {cors} from "cors";
 const cors = require('cors');
 
 // create connection with database
@@ -20,7 +20,6 @@ createConnection().then( connection => {
 
     // register all application routes
     AppRoutes.forEach(route => {
-        console.log(route);
         app[route.method](route.path, (request: Request, response: Response, next: Function) => {
             route.action(request, response)
                 .then(() => next)
