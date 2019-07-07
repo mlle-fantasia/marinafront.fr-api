@@ -1,7 +1,7 @@
-import {articlesGetAllAction} from "./controller/ArticlesGetAllAction";
-import {articlesGetByIdAction} from "./controller/ArticlesGetByIdAction";
-import {articlesSaveAction} from "./controller/ArticlesSaveAction";
-import {articlesGetAllAdminAction} from "./controller/ArticlesGetAllAction";
+import {articlesGetAllAction, articlesGetAllAdminAction} from "./controller/ArticlesGetAllAction";
+import {articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction} from "./controller/ArticlesGetByIdAction";
+import {articlesSaveAction, articlesPutAction} from "./controller/ArticlesSaveAction";
+import {projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction} from "./controller/ProjectSaveAction";
 
 /**
  * All application routes.
@@ -23,13 +23,48 @@ export const AppRoutes = [
         action: articlesGetByIdAction
     },
     {
+        path: "/articles/listeaside/:id",
+        method: "get",
+        action: listeAsideGetByIdAction
+    },
+    {
+        path: "/articles/liens/:id",
+        method: "get",
+        action: articlesGetLiensByIdAction
+    },
+    {
         path: "/admin/articles/add",
         method: "post",
         action: articlesSaveAction
     },
     {
+        path: "/admin/articles/modifier/:id",
+        method: "post",
+        action: articlesPutAction
+    },
+    {
         path: "/admin/articles/list",
         method: "get",
         action: articlesGetAllAdminAction
+    },
+    {
+        path: "/projets/:id",
+        method: "get",
+        action: projetsGetByIdAction
+    },
+    {
+        path: "/admin/projets/modifier/:id",
+        method: "post",
+        action: projetsPutAction
+    },
+    {
+        path: "/admin/projets/add",
+        method: "post",
+        action: projetsSaveAction
+    },
+    {
+        path: "/admin/projets/list",
+        method: "get",
+        action: projetsGetAllAdminAction
     },
 ];

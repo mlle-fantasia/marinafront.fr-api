@@ -8,7 +8,7 @@ import {Article} from "../entity/Article";
 export async function articlesGetAllAction(request: Request, response: Response) {
 
     const entities = await getRepository(Article).createQueryBuilder("article")
-        .select(["article.title", "article.miniature","article.resume","article.langage","article.site"])
+        .select(["article.id","article.title", "article.miniature","article.resume","article.langage","article.site"])
         .getMany();
         response.send(entities);
 
@@ -17,7 +17,7 @@ export async function articlesGetAllAction(request: Request, response: Response)
 export async function articlesGetAllAdminAction(request: Request, response: Response) {
 
     const entities = await getRepository(Article).createQueryBuilder("article")
-        .select(["article.title", "article.miniature"])
+        .select(["article.id","article.title", "article.miniature"])
         .getMany();
 
     response.send(entities);
