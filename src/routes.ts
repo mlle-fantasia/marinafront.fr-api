@@ -2,6 +2,7 @@ import {articlesGetAllAction, articlesGetAllAdminAction} from "./controller/Arti
 import {articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction} from "./controller/ArticlesGetByIdAction";
 import {articlesSaveAction, articlesPutAction} from "./controller/ArticlesSaveAction";
 import {projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction} from "./controller/ProjectSaveAction";
+import {authAction} from "./controller/AuthentificationAction";
 
 /**
  * All application routes.
@@ -11,6 +12,11 @@ export const AppRoutes = [
         path: "/",
         method: "get",
         action: articlesGetAllAction
+    },
+    {
+        path: "/login",
+        method: "post",
+        action: authAction
     },
     {
         path: "/articles/list",
