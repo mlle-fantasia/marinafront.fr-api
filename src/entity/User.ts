@@ -14,7 +14,7 @@ export class User {
 	@Column({ name: "us_tel" })
 	tel: string;
 
-	@Column({ name: "us_adress" })
+	@Column({ name: "us_address" })
 	address: string;
 
 	@Column({ name: "us_city" })
