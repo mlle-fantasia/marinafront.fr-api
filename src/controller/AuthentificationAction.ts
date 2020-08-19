@@ -17,9 +17,9 @@ export async function authAction(request: Request, response: Response) {
 		},
 	});
 
-	bcrypt.hash(request.body.pass, 10, function (err, hash) {
+	/* 	bcrypt.hash(request.body.pass, 10, function (err, hash) {
 		console.log("1", hash);
-	});
+	}); */
 
 	if (!user.length) response.send("pas ok");
 	let hash = user[0].password;
