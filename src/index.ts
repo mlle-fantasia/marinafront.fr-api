@@ -10,6 +10,9 @@ import { User } from "./entity/User";
 import { LOADIPHLPAPI } from "dns";
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv").config();
+}
 
 // create connection with database
 // TypeORM creates connection pools and uses them for your requests
@@ -46,7 +49,7 @@ createConnection()
 
 		// register all application routes
 		AppRoutes.forEach((route) => {
-			app[route.method](route.path, (request: Request, response: Response, next: Function) => {
+			app[route.method](route.path, ...route.middlewares, (request: Request, response: Response, next: Function) => {
 				route
 					.action(request, response)
 					.then(() => next)

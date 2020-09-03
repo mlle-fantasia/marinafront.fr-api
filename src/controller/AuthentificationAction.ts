@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getManager, getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { LOADIPHLPAPI } from "dns";
+var jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcrypt");
 
@@ -9,7 +10,6 @@ const bcrypt = require("bcrypt");
  * Saves given post.
  */
 export async function authAction(request: Request, response: Response) {
-	console.log(request.body);
 	const userRepository = getManager().getRepository(User);
 	const user = await userRepository.find({
 		where: {
@@ -19,15 +19,19 @@ export async function authAction(request: Request, response: Response) {
 
 	if (!user.length) response.send("pas ok");
 	let hash = user[0].password;
-	bcrypt.compare(request.body.pass, hash).then(function (res) {
-		console.log("2", hash);
-		console.log("res ", res);
+	bcrypt.compare(request.body.pass, hash).then(async function (res) {
 		if (res) {
-			response.send("ok");
+			let token = generateToken();
+			response.send({ token });
 		} else {
 			response.status(401);
 			response.send("pas ok");
 			return;
 		}
 	});
+}
+
+function generateToken() {
+	var jeton = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 30, foo: "bar" }, process.env.TOKEN_KEY);
+	return jeton;
 }
