@@ -43,7 +43,7 @@ export const AppRoutes = [
 		action: articlesGetByIdAction,
 		middlewares: [],
 	},
-	{
+	/* {
 		path: "/articles/listeaside/:id",
 		method: "get",
 		action: listeAsideGetByIdAction,
@@ -54,7 +54,7 @@ export const AppRoutes = [
 		method: "get",
 		action: articlesGetLiensByIdAction,
 		middlewares: [],
-	},
+	}, */
 	{
 		path: "/admin/articles/add",
 		method: "post",
@@ -63,7 +63,7 @@ export const AppRoutes = [
 	},
 	{
 		path: "/admin/articles/modifier/:id",
-		method: "post",
+		method: "put",
 		action: articlesPutAction,
 		middlewares: [authMiddleware],
 	},

@@ -32,6 +32,6 @@ export async function authAction(request: Request, response: Response) {
 }
 
 function generateToken() {
-	var jeton = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 30, foo: "bar" }, process.env.TOKEN_KEY);
+	var jeton = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 60 * 60, foo: "bar" }, process.env.TOKEN_KEY);
 	return jeton;
 }
