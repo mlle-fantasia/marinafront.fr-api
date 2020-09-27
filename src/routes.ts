@@ -1,6 +1,6 @@
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
 import { articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction } from "./controller/ArticlesGetByIdAction";
-import { articlesSaveAction, articlesPutAction } from "./controller/ArticlesSaveAction";
+import { articlesSaveAction, articlesPutAction, articlesPutImageAction } from "./controller/ArticlesSaveAction";
 import { projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction } from "./controller/ProjectSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
 import { Request, Response } from "express";
@@ -71,6 +71,12 @@ export const AppRoutes = [
 		path: "/admin/articles/list",
 		method: "get",
 		action: articlesGetAllAdminAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/articles/:id/image",
+		method: "post",
+		action: articlesPutImageAction,
 		middlewares: [authMiddleware],
 	},
 	{
