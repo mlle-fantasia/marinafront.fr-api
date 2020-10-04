@@ -1,9 +1,16 @@
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
 import { articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction } from "./controller/ArticlesGetByIdAction";
-import { articlesSaveAction, articlesPutAction, articlesPutImageAction } from "./controller/ArticlesSaveAction";
+import {
+	articlesSaveAction,
+	articlesPutAction,
+	articlesPostMiniatureAction,
+	articlesGetMiniatureAction,
+	articlesHiddenAction,
+} from "./controller/ArticlesSaveAction";
 import { projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction } from "./controller/ProjectSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
 import { Request, Response } from "express";
+
 var jwt = require("jsonwebtoken");
 
 function authMiddleware(request: Request, response: Response, next) {
@@ -68,6 +75,12 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
+		path: "/admin/articles/hide/:id",
+		method: "put",
+		action: articlesHiddenAction,
+		middlewares: [authMiddleware],
+	},
+	{
 		path: "/admin/articles/list",
 		method: "get",
 		action: articlesGetAllAdminAction,
@@ -76,8 +89,14 @@ export const AppRoutes = [
 	{
 		path: "/admin/articles/:id/image",
 		method: "post",
-		action: articlesPutImageAction,
+		action: articlesPostMiniatureAction,
 		middlewares: [authMiddleware],
+	},
+	{
+		path: "/articles/:id/miniature",
+		method: "get",
+		action: articlesGetMiniatureAction,
+		middlewares: [],
 	},
 	{
 		path: "/projets/:id",

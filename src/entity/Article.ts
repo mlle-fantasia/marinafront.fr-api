@@ -21,6 +21,9 @@ export class Article {
 	@Column({ name: "ar_miniature" })
 	miniature: string;
 
+	@Column({ name: "ar_hidden" })
+	hidden: boolean;
+
 	@Column({ name: "ar_site", nullable: true })
 	site: string;
 

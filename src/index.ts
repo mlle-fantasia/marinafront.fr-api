@@ -7,7 +7,7 @@ import * as bodyParser from "body-parser";
 import { AppRoutes } from "./routes";
 import { cors } from "cors";
 import { User } from "./entity/User";
-import { LOADIPHLPAPI } from "dns";
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 if (process.env.NODE_ENV !== "production") {
@@ -20,6 +20,7 @@ createConnection()
 	.then(async (connection) => {
 		// create express app
 		const app = express();
+		app.use(fileUpload({ abortOnLimit: true, responseOnLimit: "File size limit has been reached" })); // safeFileNames:true
 		app.use(bodyParser.json());
 		app.use(
 			cors({

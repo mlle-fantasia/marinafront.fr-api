@@ -72,21 +72,45 @@ export async function articlesPutAction(request: Request, response: Response) {
 	// return saved post back
 	response.send(article);
 }
-export async function articlesPutImageAction(request: Request, response: Response) {
+
+export async function articlesHiddenAction(request: Request, response: Response) {
+	// get a post repository to perform operations with post
 	const articleRepository = getManager().getRepository(Article);
+	// load a artticle by a given post id
 	const article = await articleRepository.findOne(request.params.id);
+	article.hidden = request.body.hidden;
+	// save received post
+	await articleRepository.save(article);
 
-	/* 	row_co.co_avatar = path.basename(request.files.image.name);
+	// return saved post back
+	response.send(article);
+}
+export async function articlesPostMiniatureAction(req, res) {
+	const articleRepository = getManager().getRepository(Article);
+	const article = await articleRepository.findOne(req.params.id);
 
-	let uploadPathDirImage = path.dirname(__dirname) + "/uploads/image/";
-	let ext = path.extname(row_co.co_avatar).toLowerCase();
-	fs.ensureDirSync(uploadPathDirImage);
-	let filenameOrigin = uploadPathDirImage + "original-" + row_co.co_id + ext;
+	let ext = path.extname(req.files.image.name).toLowerCase();
+	fs.ensureDirSync(process.cwd() + "/uploads/miniatures");
+	let filenameOrigin = process.cwd() + "/uploads/miniatures/article" + req.params.id + ext;
+	req.files.image.mv(filenameOrigin, async function (err) {
+		if (err) return res.status(500).send(err);
 
-			let filenameOrigin = Services.getAvatarPathOrigin(row_co);
-			// let filenameDest = Services.getAvatarPathDest(row_co, w, h);
-			response.files.image.mv(filenameOrigin, async function (err) {
-				if (err) return response.status(500).send(err);
-				let row_co2 = await Contacts.update({ co_id: row_co.co_id }, { co_avatar: row_co.co_avatar }).exec(true);
-				response.send("ok"); */
+		article.miniature = req.files.image.name;
+		await articleRepository.save(article);
+
+		res.send("ok");
+	});
+}
+
+export async function articlesGetMiniatureAction(req, res) {
+	const articleRepository = getManager().getRepository(Article);
+	const article = await articleRepository.findOne(req.params.id);
+	let ext = "";
+	if (article.miniature) ext = path.extname(article.miniature).toLowerCase();
+
+	let filenameDest = process.cwd() + "/uploads/miniatures/article" + req.params.id + ext;
+	if (!fs.existsSync(filenameDest)) return res.send("not_found");
+
+	let readStream = fs.createReadStream(filenameDest);
+	readStream.pipe(res);
 }
