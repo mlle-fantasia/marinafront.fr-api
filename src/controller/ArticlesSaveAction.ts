@@ -1,8 +1,8 @@
-import { LOADIPHLPAPI } from "dns";
 import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { Article } from "../entity/Article";
 import { Lien } from "../entity/Lien";
+import { getConnection } from "typeorm";
 const fs = require("fs-extra");
 const path = require("path");
 
@@ -113,4 +113,10 @@ export async function articlesGetMiniatureAction(req, res) {
 
 	let readStream = fs.createReadStream(filenameDest);
 	readStream.pipe(res);
+}
+
+export async function articlesDeleteArticleAction(request: Request, response: Response) {
+	await getConnection().createQueryBuilder().delete().from(Article).where("id = :id", { id: request.params.id }).execute();
+	console.log("delete ", request.params.id);
+	response.send("ok");
 }

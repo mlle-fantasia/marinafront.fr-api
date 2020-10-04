@@ -6,6 +6,7 @@ import {
 	articlesPostMiniatureAction,
 	articlesGetMiniatureAction,
 	articlesHiddenAction,
+	articlesDeleteArticleAction,
 } from "./controller/ArticlesSaveAction";
 import { projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction } from "./controller/ProjectSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
@@ -84,6 +85,12 @@ export const AppRoutes = [
 		path: "/admin/articles/list",
 		method: "get",
 		action: articlesGetAllAdminAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/articles/:id",
+		method: "delete",
+		action: articlesDeleteArticleAction,
 		middlewares: [authMiddleware],
 	},
 	{
