@@ -19,4 +19,10 @@ export class User {
 
 	@Column({ name: "us_city" })
 	city: string;
+
+	@Column({ name: "us_area" })
+	area: string;
+
+	@Column({ name: "us_cv" })
+	cv: string;
 }

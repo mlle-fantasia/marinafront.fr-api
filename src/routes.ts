@@ -1,3 +1,4 @@
+import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
 import { articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
@@ -63,6 +64,25 @@ export const AppRoutes = [
 		action: articlesGetLiensByIdAction,
 		middlewares: [],
 	}, */
+	{
+		path: "/user",
+		method: "get",
+		action: userGetAction,
+		middlewares: [],
+	},
+	{
+		path: "/admin/user/modifier/:id",
+		method: "put",
+		action: userPutAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/user/modifiercv",
+		method: "post",
+		action: userPostCv,
+		middlewares: [authMiddleware],
+	},
+
 	{
 		path: "/admin/articles/add",
 		method: "post",
