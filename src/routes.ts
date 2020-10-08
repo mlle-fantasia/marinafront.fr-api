@@ -1,5 +1,6 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
+import { projectsGetAllAction } from "./controller/ProjetsGetAllAction";
 import { articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
@@ -9,7 +10,7 @@ import {
 	articlesHiddenAction,
 	articlesDeleteArticleAction,
 } from "./controller/ArticlesSaveAction";
-import { projetsSaveAction, projetsGetAllAdminAction, projetsPutAction, projetsGetByIdAction } from "./controller/ProjectSaveAction";
+import { projectsSaveAction, projectsGetAllAdminAction, projectsPutAction, projectsGetByIdAction } from "./controller/ProjectsSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
 import { Request, Response } from "express";
 
@@ -50,6 +51,18 @@ export const AppRoutes = [
 		path: "/articles/:id",
 		method: "get",
 		action: articlesGetByIdAction,
+		middlewares: [],
+	},
+	{
+		path: "/projets/list",
+		method: "get",
+		action: projectsGetAllAction,
+		middlewares: [],
+	},
+	{
+		path: "/projets/:id",
+		method: "get",
+		action: projectsGetByIdAction,
 		middlewares: [],
 	},
 	/* {
@@ -126,27 +139,21 @@ export const AppRoutes = [
 		middlewares: [],
 	},
 	{
-		path: "/projets/:id",
-		method: "get",
-		action: projetsGetByIdAction,
-		middlewares: [],
-	},
-	{
 		path: "/admin/projets/modifier/:id",
 		method: "post",
-		action: projetsPutAction,
+		action: projectsPutAction,
 		middlewares: [authMiddleware],
 	},
 	{
 		path: "/admin/projets/add",
 		method: "post",
-		action: projetsSaveAction,
+		action: projectsSaveAction,
 		middlewares: [authMiddleware],
 	},
 	{
 		path: "/admin/projets/list",
 		method: "get",
-		action: projetsGetAllAdminAction,
+		action: projectsGetAllAdminAction,
 		middlewares: [authMiddleware],
 	},
 ];

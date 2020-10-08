@@ -60,6 +60,7 @@ export async function articlesPutAction(request: Request, response: Response) {
 	}
 
 	article.title = request.body.title;
+	article.oc = request.body.oc;
 	article.resume = request.body.resume;
 	article.miniature = request.body.miniature;
 	article.site = request.body.site;

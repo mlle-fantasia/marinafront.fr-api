@@ -5,7 +5,7 @@ import { Projet } from "../entity/Projet";
 /**
  * Loads all posts from the database.
  */
-export async function projetsGetAllAction(request: Request, response: Response) {
+export async function projectsGetAllAction(request: Request, response: Response) {
 	const entities = await getRepository(Projet)
 		.createQueryBuilder("projet")
 		.select(["projet.id", "projet.title", "projet.langage", "projet.site"])
@@ -13,7 +13,7 @@ export async function projetsGetAllAction(request: Request, response: Response) 
 	response.send(entities);
 }
 
-export async function projetsGetAllAdminAction(request: Request, response: Response) {
+export async function projectsGetAllAdminAction(request: Request, response: Response) {
 	const entities = await getRepository(Projet).createQueryBuilder("projet").select(["projet.id", "projet.title", "projet.miniature"]).getMany();
 	response.send(entities);
 }
