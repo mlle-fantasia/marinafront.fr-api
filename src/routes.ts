@@ -1,7 +1,7 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
 import { projectsGetAllAction } from "./controller/ProjetsGetAllAction";
-import { articlesGetByIdAction, listeAsideGetByIdAction, articlesGetLiensByIdAction } from "./controller/ArticlesGetByIdAction";
+import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
 	articlesPutAction,
@@ -12,6 +12,15 @@ import {
 } from "./controller/ArticlesSaveAction";
 import { projectsSaveAction, projectsGetAllAdminAction, projectsPutAction, projectsGetByIdAction } from "./controller/ProjectsSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
+import { postsGetAllAction, postsGetByIdAction } from "./controller/PostsGetAction";
+import {
+	postsPostAction,
+	postsPutAction,
+	postsHiddenAction,
+	postsPostImageAction,
+	postsGetImageAction,
+	postDeleteAction,
+} from "./controller/PostsSaveAction";
 import { Request, Response } from "express";
 
 var jwt = require("jsonwebtoken");
@@ -154,6 +163,54 @@ export const AppRoutes = [
 		path: "/admin/projets/list",
 		method: "get",
 		action: projectsGetAllAdminAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/posts/list",
+		method: "get",
+		action: postsGetAllAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/posts/list",
+		method: "get",
+		action: postsGetAllAction,
+		middlewares: [],
+	},
+	{
+		path: "/admin/posts/add",
+		method: "post",
+		action: postsPostAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/posts/:id/image",
+		method: "post",
+		action: postsPostImageAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/posts/edit/:id",
+		method: "put",
+		action: postsPutAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/posts/hidden/:id",
+		method: "put",
+		action: postsHiddenAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/posts/:id",
+		method: "get",
+		action: postsGetByIdAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/posts/:id/image",
+		method: "get",
+		action: postsGetImageAction,
 		middlewares: [authMiddleware],
 	},
 ];

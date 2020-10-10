@@ -18,7 +18,7 @@ export async function postsGetAllAction(request: Request, response: Response) {
  * @param response
  * @returns a post object
  */
-export async function articlesGetByIdAction(request: Request, response: Response) {
+export async function postsGetByIdAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
 	const articleRepository = getManager().getRepository(Post);
 
