@@ -1,6 +1,6 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
-import { projectsGetAllAction } from "./controller/ProjetsGetAllAction";
+import { projectsGetAllAction } from "./controller/ProjectsGetAllAction";
 import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
