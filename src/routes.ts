@@ -205,12 +205,12 @@ export const AppRoutes = [
 		path: "/posts/:id",
 		method: "get",
 		action: postsGetByIdAction,
-		middlewares: [authMiddleware],
+		middlewares: [],
 	},
 	{
 		path: "/posts/:id/image",
 		method: "get",
 		action: postsGetImageAction,
-		middlewares: [authMiddleware],
+		middlewares: [],
 	},
 ];
