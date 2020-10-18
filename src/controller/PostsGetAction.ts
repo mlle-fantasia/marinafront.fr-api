@@ -6,10 +6,10 @@ import { Post } from "../entity/Post";
  * Loads all posts from the database.
  *  * @param request
  * @param response
- *  * @returns a tableau of post object
+ *  * @returns a tableau of post object order by l'ordre
  */
 export async function postsGetAllAction(request: Request, response: Response) {
-	const entities = await getRepository(Post).createQueryBuilder("post").select(["post.id", "post.title", "post.contenu", "post.image"]).getMany();
+	const entities = await getRepository(Post).createQueryBuilder("post").orderBy("post.order", "ASC").getMany();
 	response.send(entities);
 }
 /**

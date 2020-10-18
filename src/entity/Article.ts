@@ -6,6 +6,9 @@ export class Article {
 	@PrimaryGeneratedColumn({ name: "ar_id" })
 	id: number;
 
+	@Column({ name: "ar_order" })
+	order: number;
+
 	@Column({ name: "ar_title" })
 	title: string;
 

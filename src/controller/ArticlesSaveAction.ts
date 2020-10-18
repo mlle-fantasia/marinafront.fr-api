@@ -7,7 +7,8 @@ const fs = require("fs-extra");
 const path = require("path");
 
 /**
- * Saves given post.
+ * post article
+ * Saves given new article .
  */
 export async function articlesSaveAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
@@ -20,6 +21,7 @@ export async function articlesSaveAction(request: Request, response: Response) {
 	article.site = request.body.site;
 	article.contenu = request.body.contenu;
 	article.langage = request.body.langage;
+	article.order = parseInt(request.body.order);
 
 	const newArticle = articleRepository.create(article);
 
@@ -30,6 +32,11 @@ export async function articlesSaveAction(request: Request, response: Response) {
 	response.send(newArticle);
 }
 
+
+/**
+ * put article
+ * Saves given article.
+ */
 export async function articlesPutAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
 	const articleRepository = getManager().getRepository(Article);
@@ -66,6 +73,7 @@ export async function articlesPutAction(request: Request, response: Response) {
 	article.site = request.body.site;
 	article.contenu = request.body.contenu;
 	article.langage = request.body.langage;
+	article.order = request.body.order;
 
 	// save received post
 	await articleRepository.save(article);
@@ -74,6 +82,13 @@ export async function articlesPutAction(request: Request, response: Response) {
 	response.send(article);
 }
 
+/**
+ * 
+ * @param request 
+ * @param response
+ * put d'un article pour modifier le champs hidden 
+ *  
+ */
 export async function articlesHiddenAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
 	const articleRepository = getManager().getRepository(Article);
@@ -86,6 +101,15 @@ export async function articlesHiddenAction(request: Request, response: Response)
 	// return saved post back
 	response.send(article);
 }
+
+/**
+ * 
+ * @param request 
+ * @param response
+ * enregistre l'image miniature de l'article dans uploads/miniatures 
+ * sous le nom : "article" + id de l'article
+ *  
+ */
 export async function articlesPostMiniatureAction(req, res) {
 	const articleRepository = getManager().getRepository(Article);
 	const article = await articleRepository.findOne(req.params.id);
@@ -103,21 +127,14 @@ export async function articlesPostMiniatureAction(req, res) {
 	});
 }
 
-export async function articlesGetMiniatureAction(req, res) {
-	const articleRepository = getManager().getRepository(Article);
-	const article = await articleRepository.findOne(req.params.id);
-	let ext = "";
-	if (article.miniature) ext = path.extname(article.miniature).toLowerCase();
-
-	let filenameDest = process.cwd() + "/uploads/miniatures/article" + req.params.id + ext;
-	if (!fs.existsSync(filenameDest)) return res.send("not_found");
-
-	let readStream = fs.createReadStream(filenameDest);
-	readStream.pipe(res);
-}
-
+/**
+ * 
+ * @param request 
+ * @param response
+ * supprime un article avec l'id donné en paramètre de la route
+ *  
+ */
 export async function articlesDeleteArticleAction(request: Request, response: Response) {
 	await getConnection().createQueryBuilder().delete().from(Article).where("id = :id", { id: request.params.id }).execute();
-	console.log("delete ", request.params.id);
 	response.send("ok");
 }

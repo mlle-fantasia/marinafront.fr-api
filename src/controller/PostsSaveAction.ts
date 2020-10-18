@@ -17,6 +17,9 @@ export async function postsPostAction(request: Request, response: Response) {
 	post.image = request.body.site;
 	post.contenu = request.body.contenu;
 	post.hidden = request.body.hidden;
+	post.order = request.body.order;
+	post.resume = request.body.resume 
+	post.date = request.body.date ? request.body.date : new Date() ;
 
 	const newPost = postRepository.create(post);
 
@@ -38,6 +41,9 @@ export async function postsPutAction(request: Request, response: Response) {
 	post.image = request.body.site;
 	post.contenu = request.body.contenu;
 	post.hidden = request.body.hidden;
+	post.order = request.body.order;
+	post.date = request.body.date 
+	post.resume = request.body.resume 
 
 	const newPost = postRepository.create(post);
 

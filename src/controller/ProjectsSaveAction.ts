@@ -3,7 +3,8 @@ import { getManager, getRepository } from "typeorm";
 import { Projet } from "../entity/Projet";
 
 /**
- * Saves given post.
+ * post projet
+ * Saves given projet.
  */
 export async function projectsSaveAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
@@ -14,6 +15,7 @@ export async function projectsSaveAction(request: Request, response: Response) {
 	projet.site = request.body.site;
 	projet.contenu = request.body.contenu;
 	projet.langage = request.body.langage;
+	projet.order = request.body.order;
 
 	const newProjet = projetRepository.create(projet);
 
@@ -24,6 +26,10 @@ export async function projectsSaveAction(request: Request, response: Response) {
 	response.send(newProjet);
 }
 
+/**
+ * put projet
+ * Saves given projet.
+ */
 export async function projectsPutAction(request: Request, response: Response) {
 	// get a post repository to perform operations with post
 	const projetRepository = getManager().getRepository(Projet);
@@ -35,6 +41,7 @@ export async function projectsPutAction(request: Request, response: Response) {
 	projet.site = request.body.site;
 	projet.contenu = request.body.contenu;
 	projet.langage = request.body.langage;
+	projet.order = request.body.order;
 
 	const newProjet = projetRepository.create(projet);
 
@@ -46,8 +53,7 @@ export async function projectsPutAction(request: Request, response: Response) {
 }
 
 export async function projectsGetAllAdminAction(request: Request, response: Response) {
-	const entities = await getRepository(Projet).createQueryBuilder("projet").select(["projet.id", "projet.title"]).getMany();
-	console.log(entities);
+	const entities = await getRepository(Projet).createQueryBuilder("projet").select(["projet.id", "projet.title", "projet.order"]).orderBy("projet.order", "ASC").getMany();
 	response.send(entities);
 }
 

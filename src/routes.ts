@@ -1,12 +1,12 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
-import { articlesGetAllAction, articlesGetAllAdminAction } from "./controller/ArticlesGetAllAction";
+import { articlesGetAllAction, articlesGetAllAdminAction , articlesGetMiniatureAction, articlesGetByIdAction} from "./controller/ArticlesGetAllAction";
 import { projectsGetAllAction } from "./controller/ProjectsGetAllAction";
-import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
+// import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
 	articlesPutAction,
 	articlesPostMiniatureAction,
-	articlesGetMiniatureAction,
+	
 	articlesHiddenAction,
 	articlesDeleteArticleAction,
 } from "./controller/ArticlesSaveAction";
@@ -74,18 +74,6 @@ export const AppRoutes = [
 		action: projectsGetByIdAction,
 		middlewares: [],
 	},
-	/* {
-		path: "/articles/listeaside/:id",
-		method: "get",
-		action: listeAsideGetByIdAction,
-		middlewares: [],
-	},
-	{
-		path: "/articles/liens/:id",
-		method: "get",
-		action: articlesGetLiensByIdAction,
-		middlewares: [],
-	}, */
 	{
 		path: "/user",
 		method: "get",
