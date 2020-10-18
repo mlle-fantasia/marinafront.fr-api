@@ -12,14 +12,13 @@ import {
 } from "./controller/ArticlesSaveAction";
 import { projectsSaveAction, projectsGetAllAdminAction, projectsPutAction, projectsGetByIdAction } from "./controller/ProjectsSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
-import { postsGetAllAction, postsGetByIdAction } from "./controller/PostsGetAction";
+import { postsGetAllAction, postsGetByIdAction , postsGetImage2Action, postsGetImageAction} from "./controller/PostsGetAction";
 import {
 	postsPostAction,
 	postsPutAction,
 	postsHiddenAction,
 	postsPostImageAction,
-	postsGetImageAction,
-	postDeleteAction,
+	postDeleteAction,postsPostImage2Action
 } from "./controller/PostsSaveAction";
 import { Request, Response } from "express";
 
@@ -178,6 +177,12 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
+		path: "/admin/posts/:id/image2",
+		method: "post",
+		action: postsPostImage2Action,
+		middlewares: [authMiddleware],
+	},
+	{
 		path: "/admin/posts/edit/:id",
 		method: "put",
 		action: postsPutAction,
@@ -199,6 +204,12 @@ export const AppRoutes = [
 		path: "/posts/:id/image",
 		method: "get",
 		action: postsGetImageAction,
+		middlewares: [],
+	},
+	{
+		path: "/posts/:id/image2",
+		method: "get",
+		action: postsGetImage2Action,
 		middlewares: [],
 	},
 ];

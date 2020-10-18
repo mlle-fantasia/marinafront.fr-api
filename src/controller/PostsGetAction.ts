@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { getManager, getRepository } from "typeorm";
 import { Post } from "../entity/Post";
+const fs = require("fs-extra");
+const path = require("path");
 
 /**
  * Loads all posts from the database.
@@ -32,4 +34,28 @@ export async function postsGetByIdAction(request: Request, response: Response) {
 	}
 	// return loaded post
 	response.send(post);
+}
+
+export async function postsGetImageAction(req, res) {
+	const repository = getManager().getRepository(Post);
+	const post = await repository.findOne(req.params.id);
+	let ext = "";
+	if (post.image) ext = path.extname(post.image).toLowerCase();
+
+	let filenameDest = process.cwd() + "/uploads/posts/post" + req.params.id + ext;
+	if (!fs.existsSync(filenameDest)) return res.send("not_found");
+	let readStream = fs.createReadStream(filenameDest);
+	readStream.pipe(res);
+}
+
+export async function postsGetImage2Action(req, res) {
+	const repository = getManager().getRepository(Post);
+	const post = await repository.findOne(req.params.id);
+	let ext = "";
+	if (post.image2) ext = path.extname(post.image2).toLowerCase();
+
+	let filenameDest = process.cwd() + "/uploads/posts/post" + req.params.id +"-big"+ ext;
+	if (!fs.existsSync(filenameDest)) return res.send("not_found");
+	let readStream = fs.createReadStream(filenameDest);
+	readStream.pipe(res);
 }

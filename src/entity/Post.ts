@@ -20,6 +20,9 @@ export class Post {
 	@Column({ name: "po_image" })
 	image: string;
 
+	@Column({ name: "po_image2" })
+	image2: string;
+
 	@Column({ name: "po_date", type: "date" })
 	date: string;
 	

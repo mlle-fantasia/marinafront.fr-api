@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { Post } from "../entity/Post";
 import { getConnection } from "typeorm";
+import { LOADIPHLPAPI } from "dns";
 const fs = require("fs-extra");
 const path = require("path");
 
@@ -83,16 +84,21 @@ export async function postsPostImageAction(req, res) {
 	});
 }
 
-export async function postsGetImageAction(req, res) {
+export async function postsPostImage2Action(req, res) {
 	const repository = getManager().getRepository(Post);
 	const post = await repository.findOne(req.params.id);
-	let ext = "";
-	if (post.image) ext = path.extname(post.image).toLowerCase();
+	console.log("req.params.id",req.params.id)
+	let ext = path.extname(req.files.image.name).toLowerCase();
+	fs.ensureDirSync(process.cwd() + "/uploads/posts");
+	let filenameOrigin = process.cwd() + "/uploads/posts/post" + req.params.id +"-big"+ ext;
+	req.files.image.mv(filenameOrigin, async function (err) {
+		if (err) return res.status(500).send(err);
 
-	let filenameDest = process.cwd() + "/uploads/posts/post" + req.params.id + ext;
-	if (!fs.existsSync(filenameDest)) return res.send("not_found");
-	let readStream = fs.createReadStream(filenameDest);
-	readStream.pipe(res);
+		post.image2= req.files.image.name;
+		await repository.save(post);
+
+		res.send("ok");
+	});
 }
 
 export async function postDeleteAction(request: Request, response: Response) {
