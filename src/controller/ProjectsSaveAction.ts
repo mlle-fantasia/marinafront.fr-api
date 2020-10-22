@@ -15,7 +15,7 @@ export async function projectsSaveAction(request: Request, response: Response) {
 	projet.site = request.body.site;
 	projet.contenu = request.body.contenu;
 	projet.langage = request.body.langage;
-	projet.order = request.body.order;
+	projet.order = parseInt(request.body.order === "" ? 1000 : request.body.order);
 
 	const newProjet = projetRepository.create(projet);
 

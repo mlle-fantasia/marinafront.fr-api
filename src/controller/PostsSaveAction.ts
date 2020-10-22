@@ -18,7 +18,7 @@ export async function postsPostAction(request: Request, response: Response) {
 	post.image = request.body.site;
 	post.contenu = request.body.contenu;
 	post.hidden = request.body.hidden;
-	post.order = request.body.order;
+	post.order = parseInt(request.body.order === "" ? 1000 : request.body.order);
 	post.resume = request.body.resume 
 	post.date = request.body.date ? request.body.date : new Date() ;
 
