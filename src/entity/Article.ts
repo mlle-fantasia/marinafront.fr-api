@@ -24,7 +24,7 @@ export class Article {
 	@Column({ name: "ar_miniature" })
 	miniature: string;
 
-	@Column({ name: "ar_hidden" })
+	@Column({ name: "ar_hidden" , default:true})
 	hidden: boolean;
 
 	@Column({ name: "ar_oc" })

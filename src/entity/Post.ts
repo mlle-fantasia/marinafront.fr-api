@@ -26,6 +26,6 @@ export class Post {
 	@Column({ name: "po_date", type: "date" })
 	date: string;
 	
-	@Column({ name: "po_hidden" })
+	@Column({ name: "po_hidden" , default:true})
 	hidden: boolean;
 }

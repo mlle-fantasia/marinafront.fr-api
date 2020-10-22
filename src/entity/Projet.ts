@@ -18,7 +18,7 @@ export class Projet {
 	@Column({ name: "pr_langage" })
 	langage: string;
 
-	@Column({ name: "pr_hidden" })
+	@Column({ name: "pr_hidden", default:true })
 	hidden: boolean;
 
 	@Column({ name: "pr_site", nullable: true })
