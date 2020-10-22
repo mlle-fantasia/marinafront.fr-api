@@ -27,7 +27,7 @@ export class Article {
 	@Column({ name: "ar_hidden" , default:true})
 	hidden: boolean;
 
-	@Column({ name: "ar_oc" })
+	@Column({ name: "ar_oc" , default:false})
 	oc: boolean;
 
 	@Column({ name: "ar_site", nullable: true })
