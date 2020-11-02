@@ -16,7 +16,6 @@ export async function authAction(request: Request, response: Response) {
 			email: request.body.login,
 		},
 	});
-
 	if (!user.length) response.send("pas ok");
 	let hash = user[0].password;
 	bcrypt.compare(request.body.pass, hash).then(async function (res) {

@@ -1,6 +1,6 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction , articlesGetMiniatureAction, articlesGetByIdAction} from "./controller/ArticlesGetAllAction";
-import { projectsGetAllAction } from "./controller/ProjectsGetAllAction";
+import { projectsGetAllAction, projectsGetAllAdminAction , projectsGetByIdAction} from "./controller/ProjectsGetAllAction";
 // import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
@@ -10,7 +10,7 @@ import {
 	articlesHiddenAction,
 	articlesDeleteArticleAction,
 } from "./controller/ArticlesSaveAction";
-import { projectsSaveAction, projectsGetAllAdminAction, projectsPutAction, projectsGetByIdAction } from "./controller/ProjectsSaveAction";
+import { projectsSaveAction, projectsPutAction, projectsDeleteAction, projectsHiddenAction } from "./controller/ProjectsSaveAction";
 import { authAction } from "./controller/AuthentificationAction";
 import { postsGetAllAction, postsGetByIdAction , postsGetImage2Action, postsGetImageAction} from "./controller/PostsGetAction";
 import {
@@ -136,7 +136,7 @@ export const AppRoutes = [
 	},
 	{
 		path: "/admin/projets/modifier/:id",
-		method: "post",
+		method: "put",
 		action: projectsPutAction,
 		middlewares: [authMiddleware],
 	},
@@ -147,9 +147,21 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
+		path: "/admin/projets/hide/:id",
+		method: "put",
+		action: projectsHiddenAction,
+		middlewares: [authMiddleware],
+	},
+	{
 		path: "/admin/projets/list",
 		method: "get",
 		action: projectsGetAllAdminAction,
+		middlewares: [authMiddleware],
+	},
+	{
+		path: "/admin/projets/:id",
+		method: "delete",
+		action: projectsDeleteAction,
 		middlewares: [authMiddleware],
 	},
 	{
