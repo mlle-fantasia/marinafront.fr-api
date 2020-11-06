@@ -1,7 +1,6 @@
 import { userGetAction, userPutAction, userPostCv } from "./controller/UserAction";
 import { articlesGetAllAction, articlesGetAllAdminAction , articlesGetMiniatureAction, articlesGetByIdAction} from "./controller/ArticlesGetAllAction";
 import { projectsGetAllAction, projectsGetAllAdminAction , projectsGetByIdAction} from "./controller/ProjectsGetAllAction";
-// import { articlesGetByIdAction } from "./controller/ArticlesGetByIdAction";
 import {
 	articlesSaveAction,
 	articlesPutAction,
@@ -189,6 +188,12 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
+		path: "/admin/posts/:id",
+		method: "delete",
+		action: postDeleteAction,
+		middlewares: [authMiddleware],
+	},
+	{
 		path: "/admin/posts/:id/image2",
 		method: "post",
 		action: postsPostImage2Action,
@@ -201,7 +206,7 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
-		path: "/posts/hidden/:id",
+		path: "/admin/posts/hidden/:id",
 		method: "put",
 		action: postsHiddenAction,
 		middlewares: [authMiddleware],

@@ -4,7 +4,7 @@ import { Projet } from "../entity/Projet";
 
 /**
  * get all 
- * Loads all project from the database to affiche in site
+ * Loads all project from the database to affiche in site - pas utilisé il me semble
  */
 export async function projectsGetAllAction(request: Request, response: Response) {
 	const entities = await getRepository(Projet)

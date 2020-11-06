@@ -62,7 +62,7 @@ export async function articlesGetByIdAction(request: Request, response: Response
 	if (article.oc) {
 		projets = await getRepository(Projet)
 			.createQueryBuilder("projet")
-			.select(["projet.id", "projet.title", "projet.langage", "projet.site", "projet.contenu"])
+			.select(["projet.id", "projet.title", "projet.langage", "projet.site", "projet.contenu"]).orderBy("projet.order", "ASC").where("projet.hidden = :hidden", { hidden: 0 })
 			.getMany();
 	}
 
