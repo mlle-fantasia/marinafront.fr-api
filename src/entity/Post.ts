@@ -17,10 +17,10 @@ export class Post {
 	@Column({ name: "po_resume" })
 	resume: string;
 
-	@Column({ name: "po_image" })
+	@Column({ name: "po_image",  nullable: true })
 	image: string;
 
-	@Column({ name: "po_image2" })
+	@Column({ name: "po_image2",  nullable: true })
 	image2: string;
 
 	@Column({ name: "po_date", type: "date" })

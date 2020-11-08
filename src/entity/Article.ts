@@ -21,7 +21,7 @@ export class Article {
 	@Column({ name: "ar_langage" })
 	langage: string;
 
-	@Column({ name: "ar_miniature" })
+	@Column({ name: "ar_miniature" , nullable: true})
 	miniature: string;
 
 	@Column({ name: "ar_hidden" , default:true})
