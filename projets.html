@@ -55,43 +55,43 @@ le projet consiste à concevoir la base de données et les diagrammes UML : <br/
 <h5>Diagrammes de cas d’utilisation</h5>
 <div class="row">
     <div class="col-md-4">
-        <img  src="/upload/images/oc/package.png" alt="">
+        <img  src="/images-articles/projets/p4/package.png" alt="">
     </div>
     <div class="col-md-4">
-        <img src="/upload/images/oc/casconexion.png" alt="">
+        <img src="/images-articles/projets/p4/casconexion.png" alt="">
     </div>
     <div class="col-md-4">
-        <img  src="/upload/images/oc/cascommande.png" alt="">
+        <img  src="/images-articles/projets/p4/cascommande.png" alt="">
     </div>
         <div class="col-md-4">
-        <img  src="/upload/images/oc/casajoutplat.png" alt="">
+        <img  src="/images-articles/projets/p4/casajoutplat.png" alt="">
     </div>
         <div class="col-md-4">
-        <img  src="/upload/images/oc/caslivraison.png" alt="">
+        <img  src="/images-articles/projets/p4/caslivraison.png" alt="">
     </div>
 </div>
 <h5>Diagrammes de séquence</h5>
 <div class="row">
     <div class="col-md-4">
-        <img  src="/upload/images/oc/ajoutdunplat.png" alt="">
+        <img  src="/images-articles/projets/p4/ajoutdunplat.png" alt="">
     </div>
     <div class="col-md-4">
-        <img src="/upload/images/oc/sequencelivraison.png" alt="">
+        <img src="/images-articles/projets/p4/sequencelivraison.png" alt="">
     </div>
     <div class="col-md-4">
-        <img  src="/upload/images/oc/créationcommande.png" alt="">
+        <img  src="/images-articles/projets/p4/creationcommande.png" alt="">
     </div>
 </div>
 <h5>Diagrammes de classes</h5>
 <div class="row">
     <div class="col-md-12">
-        <img  src="/upload/images/oc/classes.png" alt="">
+        <img  src="/images-articles/projets/p4/classes.png" alt="">
     </div>
 </div>
 <h5>Diagrammes MCD</h5>
 <div class="row">
     <div class="col-md-12">
-        <img  src="/upload/images/oc/mcd.png" alt="">
+        <img  src="/images-articles/projets/p4/mcd.png" alt="">
     </div>
 </div>
 <!-- projet 4 -->
@@ -158,13 +158,13 @@ La phrase renvoyée est un tableau comprenant les objets piochés.
 <!-- projet 7 -->
 <!-- projet 8 -->
 <h4>Objectifs</h4>
-<p>Reprendre un projet existant, corriger les bugs installer des tests et l’améliorer en optimisant ses performances</p>
+<p>Reprendre un projet existant, corriger les bugs, installer des tests, analyser ses performances et l'améliorer</p>
 <h4>Analyse du code</h4>
-<p>Le projet à une structure model-vue-contrôleur c’est à dire que le controlleur fait le lien entre le model et la vue.
+<p>Le projet à une structure model-vue-contrôleur c’est à dire que le contrôleur fait le lien entre le model et la vue.
     Premièrement, dans le fichier App.js, l’application est initialisée, les objets Store, Model, Template, View et Controller sont instanciés.
     Puis, une fois que la page du navigateur est chargée, la fonction setView du controlleur est appelée. Cette fonction est le point d’entrée du programme.
     En premier lieu le programme lit l’url et en fonction, va mettre à jour les différents élément de la vue.</p>
-<h4>corriger les bugs</h4>
+<h4>Corriger les bugs</h4>
     <p>
 Le bug numéro 2 est un conflit éventuel entre deux IDs identiques. <br>
 Voici comment était générer l'id : 
@@ -187,43 +187,48 @@ il existe plusieurs possibilités pour créer des id uniques :<br>
 
 - soit on utilise un nombre incrémenté à chaque nouvelle todo cad que même si on supprime la todo, la todo suivante aura un id incrémenté. <br>
 
-- soit on utilise un timestamp. Celui correspond au nombre de seconde qui s’est écoulé depuis le 1er janvier 1970, Ainsi nous sommme assurés de sont unicité dans la mesure où ce projet de todolist ne peut pas demander deux id en même temps. (solution utilisée)
+- soit on utilise un timestamp. Celui-ci correspond au nombre de seconde qui s’est écoulé depuis le 1er janvier 1970, Ainsi nous sommmes assurés de son unicité dans la mesure où ce projet de todolist ne peut pas demander deux ids en même temps. (solution utilisée)
     </p>
 
     <h3>Les tests</h3>
     <div class="code">
         it('should highlight "Active" filter when switching to active view', function () { <br>
             <div class="alinea">
-                var todo = { id: 42, title: "my todo", completed: true };<br>
-                setUpModel([todo]);<br>
-        
-                subject.setView("#/active");<br>
-        
-                expect(view.render).toHaveBeenCalledWith("setFilter", "active");<br>
+                var todo = { id: 42, title: "my todo", completed: true };
+            </div>
+                <div class="alinea">
+                    
+                setUpModel([todo]);
+            </div>
+            <div class="alinea">
+                subject.setView("#/active");
+            </div>
+            <div class="alinea">
+                expect(view.render).toHaveBeenCalledWith("setFilter", "active");
             </div>
             
         });
     </div>
     <p>Les tests se trouvent dans des fonctions «describe» qui décrivent la fonctionnalité qui va être testée. Puis un test se trouve dans une fonction «it» qui décrit le test (ici : doit mettre en lumière le filtre «active» quand on veut afficher les todos actives) <br>
 
-        Premièrement, on définie une todo, puis cette fonction du fichier ControllerSpec crée un faut environement à partir du model ligne 171 : c’est le fonction qui est testée ligne 173 : c’est le test. ici on s’attent à ce que la fonction «view.render» soit appelée avec les paramettres «setFilter» et «active»
+        Premièrement, on définie une todo, puis cette fonction du fichier ControllerSpec crée un faut environement à partir du model. Ligne suivante, c’est le fonction qui est testée : setView() avec le paramètre "#/active". Enfin, le test, on vérifie que ce que l'on attendait est bien arrivé. Ici, on s’attent à ce que la fonction «view.render» soit appelée avec les paramètres «setFilter» et «active»
         
         Si c’est le cas, le test passera si non il affichera l’erreur</p>
 
         <h3>La performance</h3>
-        <p>Les performances d'un site peuvent être analysées avec lighthouse, un outil d’audit de google chrome. Cet outil analyse différents paramettres : <br>
+        <p>Les performances d'un site peuvent être analysées avec Lighthouse, un outil d’audit de Google Chrome. Cet outil analyse différents paramètres : <br>
 
             - le performance du site, sa vitesse de chargement <br>
             
             - l’accessibilité aux personnes ayant des handicaps, <br>
             
-            - pwa, sa capasité à s’adapter aux mobile <br>
+            - pwa, sa capasité à s’adapter aux mobiles <br>
             
             - les bonnes pratiques,<br>
             
             - le référencement</p>
-            <h3>La documentation</h3>
-            <p>Pour documenter ce projet, j’ai utilisé JsDoc. (<a href="https://www. npmjs.com/package/jsdoc">https://www. npmjs.com/package/jsdoc</a>) JsDoc est un générateur de documentation, il la génère à partir des commentaires speciaux qui se trouvent dans le code entre /** */ <br>
+            <h3>La documentation technique</h3>
+            <p>Pour documenter ce projet, j’ai utilisé JsDoc. (<a href="https://www. npmjs.com/package/jsdoc">https://www. npmjs.com/package/jsdoc</a>) JsDoc est un générateur de documentation, il la génère à partir des commentaires spéciaux qui se trouvent dans le code entre /** */ <br>
                 exemple : 
                 <div class="code">
                     <div class="commentaire">
@@ -238,5 +243,23 @@ il existe plusieurs possibilités pour créer des id uniques :<br>
                         <div class="alinea">...</div>
                     }
                 </div>
-                Premièrement un trouve la description de la fonction, puis la description des paramettres, avec son type, son nom et sa description. <br> on peut ajouter plusieurs paramettres, décrire ce que retourne la fonction... <br> Résultat après avoir généré la doc : <br>
+                Premièrement un trouve la description de la fonction, puis la description des paramettres, avec son type, son nom et sa description. On peut ajouter beaucoup d'informations comme un callback, le retour de la fonction... <br> Résultat après avoir généré la doc : <br>
             </p>
+            <h3>La documentation technique</h3>
+            <p>
+                Celle-ci décrit le fonctionnement du programme, tous ce que l'utilisateur peut faire avec le programme. Elle est visible sur la page d'accueil de la documentation générée par jsDoc.
+            </p>
+            <h3>Amélioration du projet - Ajout d’une fonctionnalité</h3>
+            <p>
+                J’ai choisi d’aller un peu plus loin en ajoutant une fonctionnalité à ce projet car en entreprise lorsqu’on reprend un projet existant, il arrive souvent que le client demande d’ajouter des fonctionnalités. <br> Pouvoir ajouter des listes de tâches <br>
+                - Afficher la liste des listes de tâches<br>
+
+- Ajouter / afficher / modifier / supprimer une liste de tâches<br>
+
+- Pouvoir mettre une date à la liste<br>
+
+- Une fois la date arrivée, les todos de la liste s’ajoutent aux todos existantes.<br>
+cette nouvelle fonctionnalité est visible sur le projet projet8-plus.
+            </p>
+            <h3>Conclusion</h3>
+            <p>Projet validé</p>
