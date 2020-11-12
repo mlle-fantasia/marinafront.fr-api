@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import { getManager, getRepository } from "typeorm";
 import { User } from "../entity/User";
-import { LOADIPHLPAPI } from "dns";
 var jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcrypt");
 
 /**
- * Saves given post.
+ * 
  */
 export async function authAction(request: Request, response: Response) {
 	const userRepository = getManager().getRepository(User);

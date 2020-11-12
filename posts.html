@@ -1,0 +1,45 @@
+<!-- fonction sort -->
+<p>
+    Cette fonction n’est pas si simple à appréhender. Elle permet de trier un tableau, mais parfois on a des surprises. Je vais expliquer comment l'utiliser à travers des exemples. <br>
+exemple simple : <br>
+<div class="code">
+    let array = [10, 5] ; <br>
+    array.sort( ( a , b ) => {
+        <div class="alinea"> return a - b;</div>
+    });
+</div>
+la fonction va passer plusieurs fois dans la fonction anonyme avec à chaque fois deux valeurs. 
+elle va comparer les valeurs et retourner un chiffre. Soit un chiffre positif, soit un chiffre négatif, soit 0. <br>
+- Si elle retourne un chiffre négatif, alors, b se placera après a. <br>
+- Si elle retourne un chiffre positif, alors, b se placera avant a. <br>
+- Si elle retourne 0, a et b resteront dans leur position d’origine. <br>
+
+Ici a équivaudra à 10 et b à 5.  a - b = 5 , 5 est un chiffre positif donc b (5) se placera  avant a (10). Le tabeau est trié !
+
+Exemple plus complexe :  <br>
+<div class="code">
+    let array = [{ eleve:"Marion", note:10}, {eleve:"Téo"}, {eleve:"Laura", note:7}] ; <br>
+    array.sort( ( a , b ) => {
+     <div class="alinea"> if(!a.note) return 1; <span class="commentaire">// si a n’a pas de note, on veut qu’il se place après </span> </div>  
+     <div class="alinea"> if(!b.note) return -1; <span class="commentaire">// si b n’a pas de note, on veut qu’il se place après</span></div>
+    <div class="alinea"> return a.note - b.note; <span class="commentaire">// si les deux ont une note, je trie</span></div>
+    });
+</div>
+
+Ici, les élèves qui n'ont pas de notes seront placer à la fin. les autres seront triés par note croissante <br>
+
+résultat : <br>
+<div class="code">
+    array = [{eleve:"Laura", note:7}, { eleve:"Marion", note:10},  {eleve:"Téo"}] ;
+</div>
+
+Pour trier dans l’ordre décroissant :  <br>
+<div class="code">
+    array.sort( ( a , b ) => {
+        <div class="alinea">  if(!a.note) return 1; </div>
+        <div class="alinea">   if(!b.note) return -1; </div>
+        <div class="alinea"> return b.note - a.note; </div>
+    });
+</div>
+Pour trier dans l'ordre décroissant, il faut inverser a et b (et ne pas mettre un plus à la place du moins)
+</p>
