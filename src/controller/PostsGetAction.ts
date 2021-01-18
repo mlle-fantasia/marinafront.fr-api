@@ -40,7 +40,7 @@ export async function postsGetImageAction(req, res) {
 	const repository = getManager().getRepository(Post);
 	const post = await repository.findOne(req.params.id);
 	let ext = "";
-	if (post.image) ext = path.extname(post.image).toLowerCase();
+	if (post && post.image) ext = path.extname(post.image).toLowerCase();
 
 	let filenameDest = process.cwd() + "/uploads/posts/post" + req.params.id + ext;
 	if (!fs.existsSync(filenameDest)) return res.send("not_found");
@@ -52,7 +52,7 @@ export async function postsGetImage2Action(req, res) {
 	const repository = getManager().getRepository(Post);
 	const post = await repository.findOne(req.params.id);
 	let ext = "";
-	if (post.image2) ext = path.extname(post.image2).toLowerCase();
+	if (post && post.image2) ext = path.extname(post.image2).toLowerCase();
 
 	let filenameDest = process.cwd() + "/uploads/posts/post" + req.params.id +"-big"+ ext;
 	if (!fs.existsSync(filenameDest)) return res.send("not_found");

@@ -182,17 +182,25 @@ export const AppRoutes = [
 		middlewares: [authMiddleware],
 	},
 	{
-		path: "/admin/posts/:id/image",
-		method: "post",
-		action: postsPostImageAction,
-		middlewares: [authMiddleware],
-	},
-	{
 		path: "/admin/posts/:id",
 		method: "delete",
 		action: postDeleteAction,
 		middlewares: [authMiddleware],
 	},
+	{
+		path: "/admin/posts/:id/miniature",
+		method: "post",
+		action: postsPostImageAction,
+		middlewares: [authMiddleware],
+	},
+	// enregistrer l'image
+	{
+		path: "/admin/posts/:id/image",
+		method: "post",
+		action: postsPostImageAction,
+		middlewares: [authMiddleware],
+	},
+	// enregistrer l'image 2
 	{
 		path: "/admin/posts/:id/image2",
 		method: "post",
@@ -218,7 +226,7 @@ export const AppRoutes = [
 		middlewares: [],
 	},
 	{
-		path: "/posts/:id/image",
+		path: "/posts/:id/miniature",
 		method: "get",
 		action: postsGetImageAction,
 		middlewares: [],
@@ -227,6 +235,12 @@ export const AppRoutes = [
 		path: "/posts/:id/image2",
 		method: "get",
 		action: postsGetImage2Action,
+		middlewares: [],
+	},
+	{
+		path: "/posts/:id/image",
+		method: "get",
+		action: postsGetImageAction,
 		middlewares: [],
 	},
 ];
