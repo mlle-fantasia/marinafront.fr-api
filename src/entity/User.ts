@@ -5,24 +5,24 @@ export class User {
 	@PrimaryGeneratedColumn({ name: "us_id" })
 	id: number;
 
-	@Column({ name: "us_email" })
+	@Column({ name: "us_email" , default:""})
 	email: string;
 
-	@Column({ name: "us_password", type: "text" })
+	@Column({ name: "us_password", type: "text" , default:""})
 	password: string;
 
-	@Column({ name: "us_tel" })
+	@Column({ name: "us_tel" , default:""})
 	tel: string;
 
-	@Column({ name: "us_address" })
+	@Column({ name: "us_address" , default:""})
 	address: string;
 
-	@Column({ name: "us_city" })
+	@Column({ name: "us_city", default:"" })
 	city: string;
 
-	@Column({ name: "us_area" })
+	@Column({ name: "us_area" , default:""})
 	area: string;
 
-	@Column({ name: "us_cv" })
+	@Column({ name: "us_cv", default:"" })
 	cv: string;
 }
