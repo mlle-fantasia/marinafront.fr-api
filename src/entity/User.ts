@@ -8,7 +8,7 @@ export class User {
 	@Column({ name: "us_email" , default:""})
 	email: string;
 
-	@Column({ name: "us_password", type: "text" , default:""})
+	@Column({ name: "us_password", type: "text" })
 	password: string;
 
 	@Column({ name: "us_tel" , default:""})
