@@ -41,8 +41,8 @@ createConnection()
 			user.tel = "0602108507";
 			user.email = "marinafront@hotmail.fr";
 			user.password = hash;
-			user.address = "16 rue de la mairie";
-			user.city = "Sophia-Antipolis";
+			user.address = "";
+			user.city = "";
 			if (!marina.length) {
 				userRepository.save(user);
 			}
