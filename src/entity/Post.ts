@@ -5,7 +5,7 @@ export class Post {
 	@PrimaryGeneratedColumn({ name: "po_id" })
 	id: number;
 
-	@Column({ name: "po_order" })
+	@Column({ name: "po_order", default:100 })
 	order: number;
 
 	@Column({ name: "po_title" })

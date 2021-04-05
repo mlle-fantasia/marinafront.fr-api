@@ -6,7 +6,7 @@ export class Projet {
 	@PrimaryGeneratedColumn({ name: "pr_id" })
 	id: number;
 
-	@Column({ name: "pr_order" })
+	@Column({ name: "pr_order", default:100})
 	order: number;
 
 	@Column({ name: "pr_title" })
@@ -15,7 +15,7 @@ export class Projet {
 	@Column({ name: "pr_contenu", type: "text" })
 	contenu: string;
 
-	@Column({ name: "pr_langage" })
+	@Column({ name: "pr_langage" , default:""})
 	langage: string;
 
 	@Column({ name: "pr_hidden", default:true })
