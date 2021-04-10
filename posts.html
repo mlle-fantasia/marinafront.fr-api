@@ -1,6 +1,6 @@
 <!-- fonction sort -->
 <p>
-    Cette fonction n’est pas si simple à appréhender. Elle permet de trier un tableau, mais parfois on a des surprises. Je vais expliquer comment l'utiliser à travers des exemples. <br>
+    Cette fonction est très pratique, elle permet de trier un tableau mais, elle n’est pas si simple à utiliser car elle nous réserve, parfois, des surprises. Je vais vous expliquer comment elle fonctionne à travers un exemple.. <br>
 exemple simple : <br>
 <div class="code">
     let array = [10, 5] ; <br>
@@ -42,4 +42,68 @@ Pour trier dans l’ordre décroissant :  <br>
     });
 </div>
 Pour trier dans l'ordre décroissant, il faut inverser a et b (et ne pas mettre un plus à la place du moins)
+</p>
+
+<!-- PDFKIT -->
+<p>
+    PdfKit est une librairie qui permet de générer des pdf, elle s’utilise côté server. Il faut positionner chaque élément sur la page en lui donnant des coordonnées X et Y en pixel. Pdfkit possède son propre langage. Il n’y a pas énormérent de fonctions, mais elles sont sufisantes pour faire prèsque tout ce que l’on veut. <br>
+
+    Par exemple pour placer un fond coloré rouge sur la moitié supérieure de la page comme ceci : </p>
+<div class="row">
+    <div class="col-md-2 offset-md-1">
+        <img src="/images-articles/posts/pdfkit1.png" alt="">
+    </div>
+</div>
+<p> il faut écrire : </p>
+<div class="code">
+    doc.rect(0, 0, doc.page.width, doc.page.height / 2).fill(“red”);
+</div>
+<p>Ici :&nbsp;</p>
+<p>- le premier paramètre de la fonction rect() : "0, 0" correspond au coordonnée x, y de départ du rectangle. </p>
+<p>-&nbsp;"doc.page.width" correspond à la largeur souhaitée pour le rectancle.</p>
+<p>- "doc.page.height / 2" correspond à la hauteur souhaitée du rectangle, ici la moitié de la page.</p>
+<p>- ".fill(“red”)" est la fonction qui va colorer le rectangle.</p>
+<p>PdfKit dessine le pdf de manière linéaire c’est a dire que si deux éléments ont les mêmes coordonnées, le deuxième va dissimuler le premier. Cela peut créer des surprises d'éléments qui ont disparus ! Mais c’est très pratique pour dessiner des background-color par exemple ou autres effets de superposition.</p>
+<p> <br>
+
+    Un exemple, pour dessiner cette page :
+</p>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <img src="/images-articles/posts/pdfkit2.jpeg" alt="">
+    </div>
+</div>
+<p>Première étape, on place l’image sur toute la page.</p>
+<div class="code">doc.image(pathImage, 0, 0, { width: doc.page.width, height: doc.page.height });<br></div>
+<p>Deuxième étape, on place le rectangle jaune au mileu de la page. Ici j’ai défini la position à la main.</p>
+<div class="code">doc.rect(130, (doc.page.height - 270) / 2, 330, 340)
+	.fillColor(“colorYellow”).fill();<br></div>
+<p>Troisième étape, on place le rectangle bleu sur la moitié droite de la page, le rectangle va se placer sur l’image et sur le rectangle jaune..</p>
+<div class="code">doc.rect(widthpage / 2, 0, doc.page.width / 2 + 10, doc.page.height)
+	.fillColor(colorBlue).fill();<br></div>
+<p>Ensuite, le logo. Si on ne connait pas les proportions d’une image, on peut demander à ce que l’image soit contenu dans un cadre, ici, l’image sera contenue et centrée horizontament dans un cadre de 140px par 140px.</p>
+<div class="code">doc.image(pathLogo, doc.page.width / 2 + 70, 40, {fit: [140, 140], align: ‘center’ });<br></div>
+<p>Doit apparaître ensuite la ligne blanche.</p>
+<div class="code">
+    doc.lineWidth(5); <span class="commentaire">// définition de l’épaisseur de la ligne</span>  <br>
+doc.strokeColor(“colorWhite”); <span class="commentaire">// définition de la couleur</span> <br>
+doc.lineJoin(“miter”)  <br>
+	.rect(148.5, (doc.page.height - 230) / 2, 297, 297)<br>
+	.stroke();<br></div>
+<p>Enfin, un rectangle bleu (le même bleu que plus haut) qui va masquer un partie de la ligne blanche, là où va être placer le texte.</p>
+<div class="code">
+    doc.rect(doc.page.width / 2, doc.page.height / 2 - 30, doc.page.width / 2, 120)
+	.fillColor(colorBlue).fill();
+    <br></div>
+
+<h3>éléments de hauteur variable</h3>
+<p>
+    Il n’est pas facile de positionner des éléments de hauteur variable. En effet, si nous devons, par exemple, 
+dessiner un tableau où nous ne savons pas à l’avance la hauteur du texte contenu dans les différentes cellules. Comment savoir où commencer la ligne suivante ? Pour répondre à cette question, pdfkit nous fournit une valeur : doc.y qui est la position y du dernier texte. Donc, il faut dessiner les cellules une par une en gardant en mémoire cette position Y. La ligne suivante du tableau commencera à la position Y la plus grande.
+    Pdfkit nous fourni aussi deux fonctions très utiles : heightOfString(text, options) et widthOfString(text, options) pour connaitre la hauteur et la largeur d’un élément après qu’il est été déssiné. Donc nous pouvons aussi utiliser ses fonctions pour incrémenter une position Y ou X est savoir où placer l’élément sivant.
+
+</p>
+<h3>Les sauts de page</h3>
+<p>
+    Pdfkit passe automatiquement à la page suivante quand il arrive en bas de la page. Le problème se pause quand on veut maitriser les sauts de page pour ne pas que pdfkit coupe des éléments au milieu. En effet, on ne peut pas connaitre la hauteur d’un élément avant que celui-ci soit dessiné. Une astuce peut être de dessiner l’élément en blanc (invisible), ensuite, nous pouvons en connaître la hauteur. Reste plus qu’a calculer si on depasse de la page, si non, on redessine l’élément si oui on saute la page.
 </p>
